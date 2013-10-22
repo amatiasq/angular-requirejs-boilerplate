@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+		<title>Calendar [LORELEI]</title>
+
+		<style>
+			body, html, #loader {
+				font-family: "Verdana";
+				padding: 0;
+				margin: 0;
+				height: 100%;
+			}
+
+			#loader {
+				text-align: center;
+				padding-top: 25%;
+			}
+		</style>
+
+		<!-- EXTERNAL DEPENDENCIES -->
+		<script src="bower_components/angular/angular.min.js"></script>
+
+<!--
+		<link rel="stylesheet/less" href="app/main.less">
+		<script src="bower_components/less/dist/less-1.5.0.min.js"></script>
+		<script src="vendor/prefixfree.min.js"></script>
+		<script src="bower_components/requirejs/require.js" data-main="app/requirejs.config.js"></script>
+-->
+
+		<link rel="stylesheet" href="build/out.css">
+		<script src="build/out.js"></script>
+		<script>require(['main']);</script>
+	</head>
+
+	<body ng-controller="MasterCtrl">
+		<div id="loader" ng-show="!loaded">Loading...</div>
+		<div id="content" ng-show="loaded" ng-view></div>
+	</body>
+</html>
