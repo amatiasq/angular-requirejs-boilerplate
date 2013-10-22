@@ -9,9 +9,11 @@ define(function(require) {
 		'module-b',
 	])
 
-	.controller('MasterCtrl', function($scope, test, tast) {
+	.controller('MasterCtrl', function($scope, $timeout, test, tast) {
 		console.log(test, tast);
-		$scope.loaded = true;
+		$timeout(function() {
+			$scope.loaded = true;
+		}, 2000);
 	});
 
 	angular.bootstrap(document.documentElement, [ 'boilerplate' ]);
