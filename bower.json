@@ -1,13 +1,18 @@
 {
-	"name": "lorelei-calendar",
-	"version": "0.0.0",
-	"authors": [
-		"A. Matías Quezada <amatiasq@gmail.com>"
-	],
-	"license": "MIT",
-	"dependencies": {
-		"angular": "~1.0.8",
-		"requirejs": "~2.1.9",
-		"less": "~1.5.0"
-	}
+  "name": "angular-requirejs-boilerplate",
+  "version": "0.6.0",
+  "description": "A boilerplate for angular/requirejs projects",
+  "repository": "git@github.com:amatiasq/angular-requirejs-boilerplate",
+  "license": "MIT",
+  "authors": [
+    "A. Matías Quezada <amatiasq@gmail.com>"
+  ],
+  "dependencies": {
+    "angular": "~1.0.8",
+    "requirejs": "~2.1.9"
+  },
+  "devDependencies": {
+    "chai": "~1.8.1",
+    "less": "~1.5.0"
+  }
 }

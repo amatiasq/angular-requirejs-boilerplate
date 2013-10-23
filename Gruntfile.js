@@ -2,10 +2,13 @@
 
 module.exports = function(grunt) {
 	'use strict';
-	// Project configuration.
 
 	grunt.initConfig({
 
+
+		//
+		// FILES STRUCTURE
+		//
 		files: {
 			entry_point: {
 				config: 'app/requirejs.config.js',
@@ -14,12 +17,20 @@ module.exports = function(grunt) {
 				less: 'app/main.less',
 			},
 
+			build: {
+				js: 'build/out.js',
+				css: 'build/out.css',
+			},
+
 			js: [
 				'app/**/*.js',
 				'components/**/*.js',
-				'!<%= files.test %>',
+				'!app/**/*.test.js',
+				'!components/**/*.test.js',
+				//'!<%= files.test %>',
 			],
 			test: [
+				'<%= files.entry_point.test %>',
 				'app/**/*.test.js',
 				'components/**/*.test.js',
 			],
@@ -34,107 +45,191 @@ module.exports = function(grunt) {
 			],
 			config: [
 				'Gruntfile.js',
+				'karma.conf.js',
 				'*.json'
 			],
-
 		},
 
+
+		//
+		// WATCH LISTENERS
+		//
 		watch: {
-			dev: {
-				files: [
-					'<%= files.less %>',
-					'<%= files.js %>',
-					'<%= files.config %>',
-				],
-				tasks: [ 'build' ]
+			config: {
+				files: [ '<%= files.config %>' ],
+				tasks: [ 'jshint:config' ],
+			},
+
+			app: {
+				files: [ '<%= files.js %>' ],
+				tasks: [ 'build-app' ],
+			},
+
+			test: {
+				files: [ '<%= files.test %>' ],
+				tasks: [ 'watch-tests' ],
+			},
+
+			less: {
+				files: [ '<%= files.less %>' ],
+				tasks: [ 'build-less' ],
+			},
+		},
+
+
+		//
+		// TESTS
+		//
+
+		karma: {
+			options: {
+				configFile: 'karma.conf.js',
+			},
+			run: { },
+			once: {
+				options: {
+					singleRun: true,
+					autoWatch: false,
+				}
 			}
 		},
+
+
+		//
+		// BUILDERS
+		//
 
 		jshint: {
 			options: {
 				jshintrc: 'jshintrc.json',
 				//ignores: '<%= files.vendor %>',
 			},
-			dev: [ '<%= files.js %>' ],
-		},
-
-		ngmin: {
-			dev: {
-				expand: true,
-				src: [ '<%= files.js %>' ],
-				dest: 'build/ngmin',
-			}
+			app: [ '<%= files.js %>' ],
+			test: [ '<%= files.test %>' ],
+			config: [ '<%= files.config %>' ],
 		},
 
 		requirejs: {
-			dev: {
+			build: {
 				options: {
 					almond: true,
-					baseUrl: 'build/ngmin/app',
-					mainConfigFile: 'build/ngmin/app/requirejs.config.js',
+					baseUrl: 'app',
+					mainConfigFile: '<%= files.entry_point.config %>',
 					name: 'main',
-					out: 'build/out.js',
-					//optimize: 'none',
+					out: '<%= files.build.js %>',
+					optimize: 'none',
 				}
 			}
 		},
 
+		ngmin: {
+			build: {
+				src: '<%= files.build.js %>',
+				dest: '<%= files.build.js %>',
+			}
+		},
+
+		uglify: {
+			build: {
+				src: '<%= files.build.js %>',
+				dest: '<%= files.build.js %>',
+			}
+		},
+
 		less: {
-			dev: {
+			build: {
 				src: [ '<%= files.entry_point.less %>' ],
-				dest: 'build/generated.css',
-				compress: false,
+				dest: '<%= files.build.css %>',
 			}
 		},
 
 		autoprefixer: {
-			dev: {
+			build: {
 				options: {
 					browsers: ['last 2 version', 'ie 8']
 				},
-				src: 'build/generated.css',
-				dest: 'build/out.css'
+				src: '<%= files.build.css %>',
+				dest: '<%= files.build.css %>'
 			}
 		},
 
-		copy: {
-			'ngmin-vendor': {
-				src: 'vendor/*',
-				dest: 'build/ngmin/',
+		cssmin: {
+			build: {
+				src: '<%= files.build.css %>',
+				dest: '<%= files.build.css %>',
 			}
 		},
 
 		clean: {
-			'before-build': [ 'build' ],
-			'after-build': [
-				'build/ngmin',
-				'build/generated.css',
-			],
+			'before-build-less': [ '<%= files.build.css %>' ],
+			'before-build-app': [ '<%= files.build.js %>' ],
+			'repo': [
+				'bower_components',
+				// grunt stops working if we delete this folder
+				//'node_modules',
+				'build',
+			]
 		}
 	});
 
-	// Grunt plugins
+
+	//
+	// GRUNT PLUGINS
+	//
+
 	grunt.loadNpmTasks('grunt-contrib-less');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks('grunt-contrib-copy');
 	grunt.loadNpmTasks('grunt-contrib-clean');
+	grunt.loadNpmTasks('grunt-contrib-uglify');
+	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-autoprefixer');
 	grunt.loadNpmTasks('grunt-ngmin');
 	grunt.loadNpmTasks('grunt-requirejs');
-	//grunt.loadNpmTasks('grunt-karma');
+	grunt.loadNpmTasks('grunt-karma');
 
-	grunt.registerTask('build', [
-		'clean:before-build',
-		'jshint:dev',
-		'ngmin:dev',
-		'copy:ngmin-vendor',
-		'requirejs:dev',
-		'less:dev',
-		'autoprefixer:dev',
-		'clean:after-build',
+
+	//
+	// BATCH TASKS
+	//
+
+	grunt.registerTask('build-less', [
+		'clean:before-build-less',
+		'less:build',
+		'autoprefixer:build',
+		'cssmin:build',
 	]);
 
-	// Default task
-	grunt.registerTask('default', [ 'watch:dev' ]);
+	grunt.registerTask('build-app', [
+		'clean:before-build-app',
+		'jshint:app',
+		'karma:once',
+		'requirejs:build',
+		'ngmin:build',
+		'uglify:build',
+	]);
+
+	grunt.registerTask('watch-tests', [
+		'jshint:test',
+		'karma:once',
+	]);
+
+	grunt.registerTask('test', [
+		'karma:run',
+	]);
+
+	grunt.registerTask('lint', [
+		'jshint',
+	]);
+
+	grunt.registerTask('build', [
+		'build-app',
+		'build-less',
+	]);
+
+
+	//
+	// DEFAULT TASK
+	//
+	grunt.registerTask('default', [ 'watch' ]);
 };
