@@ -1,8 +1,8 @@
 define(function(require) {
 	'use strict';
 
-	require('a');
-	require('component/b');
+	require('a/a');
+	require('component/b/b');
 
 	angular.module('boilerplate', [
 		'module-a',

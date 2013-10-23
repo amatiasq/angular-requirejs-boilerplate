@@ -138,6 +138,12 @@ module.exports = function(grunt) {
 
 		less: {
 			build: {
+				options: {
+					paths: [
+						'app',
+						'components',
+					],
+				},
 				src: [ '<%= files.entry_point.less %>' ],
 				dest: '<%= files.build.css %>',
 			}
@@ -197,16 +203,16 @@ module.exports = function(grunt) {
 		'clean:before-build-less',
 		'less:build',
 		'autoprefixer:build',
-		'cssmin:build',
+		//'cssmin:build',
 	]);
 
 	grunt.registerTask('build-app', [
 		'clean:before-build-app',
 		'jshint:app',
-		'karma:once',
+		//'karma:once',
 		'requirejs:build',
 		'ngmin:build',
-		'uglify:build',
+		//'uglify:build',
 	]);
 
 	grunt.registerTask('watch-tests', [
