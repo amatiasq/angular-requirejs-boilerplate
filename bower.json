@@ -1,0 +1,16 @@
+{
+  "name": "APP_NAME",
+  "version": "0.0.0",
+  "license": "MIT",
+  "private": true,
+  "authors": [
+    "YOUR_NAME <YOUR_EMAIL>"
+  ],
+  "dependencies": {
+    "requirejs": "~2.1.11",
+    "angular": "~1.2.16",
+    "angular-route": "~1.2.16",
+    "less": "~1.7.0",
+    "almond": "~0.2.9"
+  }
+}

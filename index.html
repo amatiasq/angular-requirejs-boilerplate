@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>APP_TITLE</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+
+    <!-- build:css build/out.css -->
+    <link rel="stylesheet/less" href="app/styles.less">
+    <script>less = { logLevel: 1 };</script>
+    <script src="bower_components/less/dist/less-1.7.0.js"></script>
+    <!-- endbuild -->
+  </head>
+  <body>
+    <ng-view></ng-view>
+
+    <!-- build:js build/out.js -->
+    <script src="bower_components/requirejs/require.js"></script>
+    <script src="app/config"></script>
+    <!-- endbuild -->
+  </body>
+</html>
