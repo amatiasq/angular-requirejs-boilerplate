@@ -2,7 +2,7 @@
 
 module.exports = function(grunt) {
   'use strict';
-  grunt.loadNpmTasks('grunt-ngmin');
+  grunt.loadNpmTasks('grunt-ng-annotate');
   grunt.loadNpmTasks('grunt-usemin');
   grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-clean');
@@ -35,7 +35,7 @@ module.exports = function(grunt) {
         html: 'tmp/templates.js',
         amd: 'tmp/amd-build.js',
         concat: 'tmp/concat-build.js',
-        ngmin: 'tmp/ngmin-build.js',
+        ngannotate: 'tmp/ngannotate-build.js',
         js: 'build/out.js',
         css: 'build/out.css',
       }
@@ -54,10 +54,12 @@ module.exports = function(grunt) {
       app: [ '<%= files.js %>' ],
     },
 
-    ngmin: {
+    ngAnnotate: {
+      // Will be supported soon
+      //options: { regexp: 'require(\'app-module\')', },
       almond: {
         src: '<%= files.build.concat %>',
-        dest: '<%= files.build.ngmin %>'
+        dest: '<%= files.build.ngannotate %>'
       },
     },
 
@@ -90,7 +92,7 @@ module.exports = function(grunt) {
             //pure_funcs: [ 'require' ],
           },
         },
-        src: '<%= files.build.ngmin %>',
+        src: '<%= files.build.ngannotate %>',
         dest: '<%= files.build.js %>',
       },
       optimize: {
@@ -170,9 +172,9 @@ module.exports = function(grunt) {
     'ngtemplates:app',
     'requirejs:build',
     'concat:almond',
-    'ngmin:almond',
+    'ngAnnotate:almond',
     'uglify:almond',
-    'clean:tmp',
+    //'clean:tmp',
   ]);
 
   grunt.registerTask('build', [

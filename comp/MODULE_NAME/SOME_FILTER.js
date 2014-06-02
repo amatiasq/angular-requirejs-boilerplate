@@ -1,10 +1,8 @@
 define(function(require) {
   'use strict';
-  var angular = require('angular');
-  require('app-module');
-  angular.module('ut-app')
+  var module = require('app-module')
 
-  .filter('SOME_FILTER', function() {
+  module.filter('SOME_FILTER', function() {
     return function(value) {
       // ...
     };

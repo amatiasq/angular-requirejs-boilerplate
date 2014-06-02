@@ -1,13 +1,10 @@
 define(function(require) {
   'use strict';
-  require('app-module');
-  require('comp/MODULE_NAME/MODULE_NAME');
-
   var SOME_TOOL = require('tools/SOME_TOOL');
-  var angular = require('angular');
-  angular.module('APP_NAME')
+  require('comp/MODULE_NAME/MODULE_NAME');
+  var module = require('app-module')
 
-  .config(function($routeProvider) {
+  module.config(function($routeProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'comp/MODULE_NAME/MODULE_NAME.html',

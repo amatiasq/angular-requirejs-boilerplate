@@ -1,10 +1,8 @@
 define(function(require) {
   'use strict';
-  require('app-module');
-  var angular = require('angular');
-  angular.module('APP_NAME')
+  var module = require('app-module')
 
-  .directive('SOME_DIRECTIVE', function() {
+  module.directive('SOME_DIRECTIVE', function() {
     return {
       restrict: 'E',
       scope: {

@@ -1,12 +1,9 @@
 define(function(require) {
   'use strict';
-  require('app-module');
   require('./SOME_DIRECTIVE');
+  var module = require('app-module')
 
-  var angular = require('angular');
-  angular.module('APP_NAME')
-
-  .controller('MODULE_NAMECtrl', function($scope) {
+  module.controller('MODULE_NAMECtrl', function($scope) {
     // ...
   });
 });
