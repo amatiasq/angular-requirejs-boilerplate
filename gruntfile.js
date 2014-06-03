@@ -174,7 +174,7 @@ module.exports = function(grunt) {
     'concat:almond',
     'ngAnnotate:almond',
     'uglify:almond',
-    //'clean:tmp',
+    'clean:tmp',
   ]);
 
   grunt.registerTask('build', [

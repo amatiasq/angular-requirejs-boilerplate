@@ -12,6 +12,14 @@ Just clone this repo and run
 To download the client dependencies.
 **You can start developing now.**
 
+### Easy configuration
+
+Just run
+
+    ./RUNME.sh
+
+It will ask you for a app name and the main module name and configure the files.
+
 ### Tokens
 
 Almost every UPERCASE_TEXT you see on this app is ment to be replaced by your app's specific names:
