@@ -6,7 +6,7 @@ function capitalize() {
 
 
 echo "Choose a name for your app"
-echo -n "> "
+echo "> "
 #read app_name
 app_name="pollas" # debug only
 capitalized_app_name=$(capitalize $app_name)
