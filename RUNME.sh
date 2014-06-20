@@ -42,7 +42,7 @@ do
     comp/$module_name/$module_name.js
 
   line=$(grep 'MODULE_NAME' app/styles.less | sed "s/MODULE_NAME/$module_name/g")
-  sed -i "/MODULE_NAME/a\\
+  sed -i "" "/MODULE_NAME/a\\
   $line
 " "app/styles.less"
 
