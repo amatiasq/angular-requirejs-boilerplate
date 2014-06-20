@@ -44,13 +44,13 @@ do
 
   line=$(grep 'MODULE_NAME' app/styles.less | sed "s/MODULE_NAME/$module_name/g")
   sed -i "" "/MODULE_NAME/a\\
-  $line
+$line
 " "app/styles.less"
 
 
   line=$(grep 'MODULE_NAME' app/app.js | sed "s/MODULE_NAME/$module_name/g")
   sed -i "" "/MODULE_NAME/a\\
-  $line
+$line
 " "app/app.js"
 
   #echo -n "> "
