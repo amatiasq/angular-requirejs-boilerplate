@@ -21,7 +21,7 @@ sed -i "" "s/APP_NAME/$capitalized_app_name/g" \
   index.html
 
 
-echo "Choose a name for the main module on your app"
+echo "List the modules your app will have (empty to finish)"
 echo -n "> "
 #read module_name
 module_name="player" # debug only
@@ -47,29 +47,9 @@ do
   $replaced
 ' "app/styles.less"
 
+  echo -n "> "
+  #read module_name
+  module_name="" # debug only
 done
 
-mkdir comp/$module_name
-cp comp/MODULE_NAME/MODULE_NAME.js comp/$module_name/$module_name.js
-cp comp/MODULE_NAME/MODULE_NAME.html comp/$module_name/$module_name.html
-cp comp/MODULE_NAME/MODULE_NAME.less comp/$module_name/$module_name.less
-
-
-sed -i "" "s/MODULE_NAMECtrl/${capitalized_module_name}Ctrl/g" \
-  app/app.js \
-  comp/$module_name/$module_name.js
-
-sed -i "" "s/MODULE_NAME/$module_name/g" \
-  app/app.js \
-  app/styles.less \
-  comp/$module_name/$module_name.html \
-  comp/$module_name/$module_name.js
-
-
-grep -v 'SOME_DIRECTIVE' \
-  < comp/$module_name/$module_name.js \
-  > comp/$module_name/$module_name.js.new
-
-
-mv comp/$module_name/$module_name.js.new comp/$module_name/$module_name.js
 #rm RUNME.sh
