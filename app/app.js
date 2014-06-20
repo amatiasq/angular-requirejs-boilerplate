@@ -8,7 +8,8 @@ define(function(require) {
     $routeProvider
       .when('/', {
         templateUrl: 'comp/MODULE_NAME/MODULE_NAME.html',
-        controller: 'MODULE_NAMECtrl'
+        controller: 'MODULE_NAMECtrl',
+        controllerAs: 'MODULE_NAME',
       })
       .otherwise({
         redirectTo: '/'
