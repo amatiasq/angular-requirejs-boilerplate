@@ -48,7 +48,7 @@ $line
 " "app/styles.less"
 
 
-  line=$(grep 'MODULE_NAME' app/app.js | sed "s/MODULE_NAME/$module_name/g")
+  line=$(grep "require('comp/MODULE_NAME" app/app.js | sed "s/MODULE_NAME/$module_name/g")
   echo LINE
   echo $line
   sed -i "" "/MODULE_NAME/a\\
