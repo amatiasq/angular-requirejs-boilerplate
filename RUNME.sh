@@ -30,7 +30,7 @@ capitalized_module_name=$(capitalize $module_name)
 while [ ! -z "$module_name" ]
 do
   mkdir comp/$module_name
-  cp comp/MODULE_NAME/MODULE_NAME.js comp/$module_name/$module_name.js
+  grep -v "SOME_DIRECTIVE" comp/MODULE_NAME/MODULE_NAME.js > comp/$module_name/$module_name.js
   cp comp/MODULE_NAME/MODULE_NAME.html comp/$module_name/$module_name.html
   cp comp/MODULE_NAME/MODULE_NAME.less comp/$module_name/$module_name.less
 
