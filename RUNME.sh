@@ -41,10 +41,17 @@ do
     comp/$module_name/$module_name.html \
     comp/$module_name/$module_name.js
 
+
   line=$(grep 'MODULE_NAME' app/styles.less | sed "s/MODULE_NAME/$module_name/g")
   sed -i "" "/MODULE_NAME/a\\
   $line
 " "app/styles.less"
+
+
+  line=$(grep 'MODULE_NAME' app/app.js | sed "s/MODULE_NAME/$module_name/g")
+  sed -i "" "/MODULE_NAME/a\\
+  $line
+" "app/app.js"
 
   #echo -n "> "
   #read module_name
