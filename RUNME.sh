@@ -46,7 +46,7 @@ do
   $line
 " "app/styles.less"
 
-  echo -n "> "
+  #echo -n "> "
   #read module_name
   module_name="" # debug only
 done
