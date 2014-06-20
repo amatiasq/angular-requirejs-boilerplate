@@ -10,5 +10,5 @@ define(function(require) {
     deps.push('app-templates');
   }
 
-  return angular.module('APP_NAME', deps);
+  return angular.module('pollas', deps);
 });
