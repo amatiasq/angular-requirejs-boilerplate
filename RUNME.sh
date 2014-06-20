@@ -49,7 +49,7 @@ $line
 
 
   line=$(grep 'MODULE_NAME' app/app.js | sed "s/MODULE_NAME/$module_name/g")
-  sed -i "" "/MODULE_NAME/a\\
+  sed -i "" "/MODULE_NAME/a\
 $line
 " "app/app.js"
 
