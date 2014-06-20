@@ -48,10 +48,6 @@ $line
 " "app/styles.less"
 
 
-  line=$(grep 'MODULE_NAME' app/app.js | sed "s/MODULE_NAME/$module_name/g")
-  sed -i "" "/MODULE_NAME/a\
-$line
-" "app/app.js"
 
   #echo -n "> "
   #read module_name
