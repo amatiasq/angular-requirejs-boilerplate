@@ -54,7 +54,7 @@ $line
 $line
 " "app/app.js"
 
-  chunk=$(grep -A1 -B2 "MODULE_NAMECtrl" app/app.js |
+  chunk=$(grep -A2 -B2 "MODULE_NAMECtrl" app/app.js |
     sed "s/MODULE_NAMECtrl/${capitalized_module_name}Ctrl/g" |
     sed "s/MODULE_NAME/$module_name/g")
 
