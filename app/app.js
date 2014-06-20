@@ -6,13 +6,13 @@ define(function(require) {
 
   module.config(function($routeProvider) {
     $routeProvider
-      .when('/', {
+      .when('/MODULE_NAME', {
         templateUrl: 'comp/MODULE_NAME/MODULE_NAME.html',
         controller: 'MODULE_NAMECtrl',
         controllerAs: 'MODULE_NAME',
       })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/MODULE_NAME'
       });
   });
 
