@@ -7,7 +7,8 @@ function capitalize() {
 
 echo "Choose a name for your app"
 echo -n "> "
-read app_name
+#read app_name
+app_name="pollas" # debug only
 capitalized_app_name=$(capitalize $app_name)
 
 sed -i "" "s/APP_NAME/$app_name/g" \
@@ -22,9 +23,31 @@ sed -i "" "s/APP_NAME/$capitalized_app_name/g" \
 
 echo "Choose a name for the main module on your app"
 echo -n "> "
-read module_name
+#read module_name
+module_name="player" # debug only
 capitalized_module_name=$(capitalize $module_name)
 
+while [ -z "$module_name" ]
+do
+  mkdir comp/$module_name
+  cp comp/MODULE_NAME/MODULE_NAME.js comp/$module_name/$module_name.js
+  cp comp/MODULE_NAME/MODULE_NAME.html comp/$module_name/$module_name.html
+  cp comp/MODULE_NAME/MODULE_NAME.less comp/$module_name/$module_name.less
+
+  sed -i "" "s/MODULE_NAMECtrl/${capitalized_module_name}Ctrl/g" \
+    comp/$module_name/$module_name.js
+
+  sed -i "" "s/MODULE_NAME/$module_name/g" \
+    comp/$module_name/$module_name.html \
+    comp/$module_name/$module_name.js
+
+  line=$(grep 'MODULE_NAME' app/styles.less)
+  replaced=$(echo $line | sed "s/MODULE_NAME/$module_name/g")
+  sed '/MODULE_NAME/a\
+  $replaced
+' "app/styles.less"
+
+done
 
 mkdir comp/$module_name
 cp comp/MODULE_NAME/MODULE_NAME.js comp/$module_name/$module_name.js
@@ -49,4 +72,4 @@ grep -v 'SOME_DIRECTIVE' \
 
 
 mv comp/$module_name/$module_name.js.new comp/$module_name/$module_name.js
-rm RUNME.sh
+#rm RUNME.sh
