@@ -41,10 +41,12 @@ do
     comp/$module_name/$module_name.html \
     comp/$module_name/$module_name.js
 
-  line=$(grep 'MODULE_NAME' app/styles.less)
-  replaced=$(echo $line | sed "s/MODULE_NAME/$module_name/g")
+  line=$(grep 'MODULE_NAME' app/styles.less | sed "s/MODULE_NAME/$module_name/g")
+  echo 'LINE'
+  echo $line
+
   sed '/MODULE_NAME/a\
-  $replaced
+  $line
 ' "app/styles.less"
 
   echo -n "> "
