@@ -27,7 +27,7 @@ echo -n "> "
 module_name="player" # debug only
 capitalized_module_name=$(capitalize $module_name)
 
-while [ -z "$module_name" ]
+while [ -z "$module_name" ]
 do
   mkdir comp/$module_name
   cp comp/MODULE_NAME/MODULE_NAME.js comp/$module_name/$module_name.js
@@ -42,7 +42,7 @@ do
     comp/$module_name/$module_name.js
 
   line=$(grep 'MODULE_NAME' app/styles.less)
-  replaced=$(echo $line | sed "s/MODULE_NAME/$module_name/g")
+  replaced=$(echo $line | sed "s/MODULE_NAME/$module_name/g")
   sed '/MODULE_NAME/a\
   $replaced
 ' "app/styles.less"
