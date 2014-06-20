@@ -22,7 +22,7 @@ sed -i "" "s/APP_NAME/$capitalized_app_name/g" \
 
 
 echo "List the modules your app will have (empty to finish)"
-echo -n "> "
+#echo -n "> "
 #read module_name
 module_name="player" # debug only
 capitalized_module_name=$(capitalize $module_name)
