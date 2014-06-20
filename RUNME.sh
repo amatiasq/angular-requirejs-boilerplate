@@ -48,7 +48,7 @@ do
 $line
 " "app/styles.less"
 
-  search="require('comp/MODULE_NAME"
+  search="MODULE_NAME');"
   line=$(grep "$search" app/app.js | sed "s/MODULE_NAME/$module_name/g")
   sed -i "" "/$search/a\\
 $line
