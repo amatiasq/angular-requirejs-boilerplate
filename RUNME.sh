@@ -6,7 +6,7 @@ function capitalize() {
 
 
 echo "Choose a name for your app"
-echo "> "
+echo -n "> "
 #read app_name
 app_name="pollas" # debug only
 capitalized_app_name=$(capitalize $app_name)
@@ -48,6 +48,12 @@ $line
 " "app/styles.less"
 
 
+  line=$(grep 'MODULE_NAME' app/app.js | sed "s/MODULE_NAME/$module_name/g")
+  echo LINE
+  echo $line
+  sed -i "" "/MODULE_NAME/a\\
+$line
+" "app/app.js"
 
   #echo -n "> "
   #read module_name
